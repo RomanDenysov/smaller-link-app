@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 
 
 const authRoute = require('./routes/auth');
+const linkRoute = require('./routes/add-links')
 const errorMidleware = require('./middlewares/error-midleware')
 
 // ENV CONFIG INIT
@@ -24,6 +25,7 @@ app.use(cookieParser())
 // MAIN SETTING AND CONECTION
 app.use(express.json());
 app.use('/api/auth', authRoute);
+app.use('/api/link', linkRoute);
 
 
 
@@ -43,7 +45,8 @@ const start = async () => {
                     .catch((err) => { console.log("MongoDB problem:", err)});
 
     } catch (error) {
-        console.log("Problem in index.js, func START(), error:", error)
+        console.log("Problem in index.js, func START(), error:", error);
+        process.exit(1);
     }
 }
 
